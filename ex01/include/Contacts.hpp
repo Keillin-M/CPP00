@@ -13,7 +13,7 @@
 #ifndef CONTACTS.H
 # define CONTACTS.H
 
-class 
+class Contacts
 {
 	public:
 	string	FirstName;
@@ -21,7 +21,7 @@ class
 	string	NickName;
 	int	PhoneNumber;
 	string	DarkestSecret;
-}
+};
 
 
 
