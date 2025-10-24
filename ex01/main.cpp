@@ -10,4 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
+#include <string>
 
+char	ft_add()
+{
+
+}
+
+int	main()
+{
+	std::string	input;
+
+	while (1)
+	{
+		std::cout << "PLEASE, TYPE AN OPTION: ADD, SEARCH OR EXIT" << std::endl;
+		std::getline (std::cin, input);
+		if (input.empty() || (input != "ADD" && input != "SEARCH" && input != "EXIT"))
+			std::cout << "INVALID ENTRY" << std::endl;
+		if (input == "EXIT")
+			return (0);
+		else if (input == "ADD")
+		/*else if (input == "SEARCH")*/
+	}
+}

@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Contacts.hpp                                       :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmaeda <kmaeda@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 17:47:10 by kmaeda            #+#    #+#             */
-/*   Updated: 2025/10/23 17:52:26 by kmaeda           ###   ########.fr       */
+/*   Updated: 2025/10/24 19:19:29 by kmaeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTACTS.H
-# define CONTACTS.H
+#ifndef CONTACT_HPP
+# define CONTACT_HPP
 
-class Contacts
+# include <string>
+
+class Contact
 {
 	public:
-	string	FirstName;
-	string	LastName;
-	string	NickName;
-	int	PhoneNumber;
-	string	DarkestSecret;
+		void	setField(int index, const std::string& value);
+		void	setIndex(int index);
+		int		getIndex(int index) const;
+		int		ft_check(int field, std::string value);
+		Contact(void);
+		~Contact(void);
+
+	private:
+		static std::string	field_names[5];
+		std::string			field_info[5];
+		int					index;
+		
+		enum Info {
+			FirstName,
+			LastName,
+			NickName,
+			PhoneNumber,
+			DarkestSecret
+		};
 };
-
-
 
 #endif
