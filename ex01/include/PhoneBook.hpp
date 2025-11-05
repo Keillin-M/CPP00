@@ -13,9 +13,19 @@
 #ifndef PHONE_BOOK.H
 # define PHONE_BOOK.H
 
-class PhoneBook
-{
+#include "Contact.hpp"
 
-}
+class PhoneBook {
+    public:
+        PhoneBook(void);
+        ~PhoneBook(void);
+        void    addContact();
+        void    searchContact();
+        void    displayContacts();
+
+    private:
+        Contact	contacts[8];
+        int		contactCount;
+};
 
 #endif

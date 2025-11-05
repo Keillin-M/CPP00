@@ -19,9 +19,7 @@ class Contact
 {
 	public:
 		void	setField(int index, const std::string& value);
-		void	setIndex(int index);
-		int		getIndex(int index) const;
-		int		ft_check(int field, std::string value);
+		int		valueCheck(int field, const std::string& value) const;
 		Contact(void);
 		~Contact(void);
 

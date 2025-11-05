@@ -15,53 +15,12 @@
 #include <iostream>
 #include <string>
 
-Contact::Contact(void) : index(-1) {
-    for (int i = 0; i < 5; i++)
-        field_info[i] = "";
-}
-
-Contact::~Contact(void) {}
-
 PhoneBook::PhoneBook() : contactCount(0) {}
 PhoneBook::~PhoneBook() {}
 
-int     ft_check(int field, std::string value) {
-    if (value.empty()) {
-        std::cerr << "Error: Field cannot be empty." << std::endl;
-        return 1;
-    }
-    if (field >= 0 && field < 4) { // FirstName, LastName, NickName
-        for (size_t i = 0; i < value.length(); i++) {
-            if (!isalpha(value[i])) {
-                std::cerr << "Error: First Name can only contain alphabetic characters" << std::endl;
-                return 1;
-            }
-        }
-    }
-    else if (field == 3) { // PhoneNumber
-        for (size_t i = 0; i < value.length(); i++) {
-            if (!isdigit(value[i])) {
-                std::cerr << "Error: Phone Number can only contain digits" << std::endl;
-                return 1;
-            }
-        }
-    }
-    return 0;
-}
-
-void    Contact::setField(int field, const std::string& value)
-{
-    if (ft_check(field, value))
-    //re-prompt
-    if (field >= 0 && field < 5)
-        field_info[field] = value;
-    else
-        std::cerr << "Invalid field index" << std::endl;
-}
-
-void    PhoneBook::addContact()
-{
+void    PhoneBook::addContact() {
     std::string input;
+
     for (int i = 0; i < 5; i++) {
         std::cout << "Enter ";
         switch (i) {
@@ -85,4 +44,34 @@ void    PhoneBook::addContact()
         contacts[contactCount % 8].setField(i, input);
     }
     contactCount++;
+}
+
+void    displayContacts() {
+    std::cout << "____________________________________________" << std::endl;
+    std::cout << "|                                           |" << std::endl;
+    std::cout << "|      WELCOME TO MY AWESOME PHONEBOOK      |" << std::endl;
+    std::cout << "____________________________________________" << std::endl;
+    std::cout << "|" << "|""|          |          |" << std::endl;
+    Std::cout << "|                                         |" << std::endl;
+    std::cout << "|                                         |" << std::endl;
+    std::cout << "|_________________________________________|" << std::endl;
+}
+
+void    PhoneBook::searchContact() {
+    int index;
+
+    if (contactCount == 0) {
+        std::cout << "Empty PhoneBook" << std::endl;
+        return ;
+    }
+    contacts[index].getField(0);
+    contacts[index].getField(1);
+    contacts[index].getField(2);
+    displayPhonebook();
+    std::cout << "Enter index: ";
+    std::cin >> index;
+    while (!isdigit(index) && (index < 0) && (index > 7)) {
+        std::cout << "Not valid index" << std::endl;
+        std::cout << "Enter index: ";
+    }
 }

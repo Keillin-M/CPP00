@@ -10,16 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "PhoneBook.hpp"
 #include <iostream>
 #include <string>
 
-char	ft_add()
-{
-
-}
-
 int	main()
 {
+	PhoneBook	phoneBook;
 	std::string	input;
 
 	while (1)
@@ -31,6 +28,8 @@ int	main()
 		if (input == "EXIT")
 			return (0);
 		else if (input == "ADD")
-		/*else if (input == "SEARCH")*/
+			phoneBook.addContact();
+		else if (input == "SEARCH")
+			phoneBook.searchContact();
 	}
 }
