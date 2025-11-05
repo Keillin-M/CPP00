@@ -6,11 +6,12 @@
 /*   By: kmaeda <kmaeda@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:55:37 by kmaeda            #+#    #+#             */
-/*   Updated: 2025/10/24 19:29:35 by kmaeda           ###   ########.fr       */
+/*   Updated: 2025/11/05 01:08:35 by kmaeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Contact.hpp"
+#include "../include/PhoneBook.hpp"
 #include <iostream>
 #include <string>
 
@@ -19,9 +20,10 @@ Contact::Contact(void) : index(-1) {
         field_info[i] = "";
 }
 
-Contact::~Contact(void)
-{
-}
+Contact::~Contact(void) {}
+
+PhoneBook::PhoneBook() : contactCount(0) {}
+PhoneBook::~PhoneBook() {}
 
 int     ft_check(int field, std::string value) {
     if (value.empty()) {
@@ -49,9 +51,38 @@ int     ft_check(int field, std::string value) {
 
 void    Contact::setField(int field, const std::string& value)
 {
-    ft_check(field, value);
+    if (ft_check(field, value))
+    //re-prompt
     if (field >= 0 && field < 5)
         field_info[field] = value;
     else
         std::cerr << "Invalid field index" << std::endl;
+}
+
+void    PhoneBook::addContact()
+{
+    std::string input;
+    for (int i = 0; i < 5; i++) {
+        std::cout << "Enter ";
+        switch (i) {
+            case 0:
+                std::cout << "First Name: ";
+                break;
+            case 1:
+                std::cout << "Last Name: ";
+                break;
+            case 2:
+                std::cout << "Nick Name: ";
+                break;
+            case 3:
+                std::cout << "Phone Number: ";
+                break;
+            case 4:
+                std::cout << "Darkest Secret: ";
+                break;
+        }
+        std::getline(std::cin, input);
+        contacts[contactCount % 8].setField(i, input);
+    }
+    contactCount++;
 }
