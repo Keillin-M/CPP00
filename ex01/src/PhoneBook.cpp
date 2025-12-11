@@ -6,7 +6,7 @@
 /*   By: kmaeda <kmaeda@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:55:37 by kmaeda            #+#    #+#             */
-/*   Updated: 2025/11/05 01:08:35 by kmaeda           ###   ########.fr       */
+/*   Updated: 2025/12/11 16:55:24 by kmaeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ PhoneBook::~PhoneBook() {}
 void    PhoneBook::addContact() {
     std::string input;
 
-    for (int i = 0; i < 5; i++) {
-        std::cout << "Enter ";
+    std::cout << "Please enter ";
+    for (int i = 0; i < 5; i++) { 
         switch (i) {
             case 0:
                 std::cout << "First Name: ";
@@ -41,20 +41,25 @@ void    PhoneBook::addContact() {
                 break;
         }
         std::getline(std::cin, input);
-        contacts[contactCount % 8].setField(i, input);
+        if (!contacts[contactCount % 8].setField(i, input)) {
+            std::cout << "Failed to add contact" << std::endl;
+            return;
+        }
     }
     contactCount++;
+    std::cout << "Contact added successfully!" << std::endl;
+    return;
 }
 
 void    displayContacts() {
-    std::cout << "____________________________________________" << std::endl;
-    std::cout << "|                                           |" << std::endl;
-    std::cout << "|      WELCOME TO MY AWESOME PHONEBOOK      |" << std::endl;
-    std::cout << "____________________________________________" << std::endl;
-    std::cout << "|" << "|""|          |          |" << std::endl;
-    Std::cout << "|                                         |" << std::endl;
+    std::cout << " ____________________________________________" << std::endl;
+    std::cout << "|                                            |" << std::endl;
+    std::cout << "|            MY AWESOME PHONEBOOK            |" << std::endl;
+    std::cout << "|____________________________________________|" << std::endl;
+    std::cout << "|" << "     Index" << "|" << "First Name" << "|" << " Last Name" << "|" << " Nick Name" << "|" << std::endl;
     std::cout << "|                                         |" << std::endl;
-    std::cout << "|_________________________________________|" << std::endl;
+    std::cout << "|                                         |" << std::endl;
+    std::cout << "|_____________________________________________|" << std::endl;
 }
 
 void    PhoneBook::searchContact() {
@@ -62,12 +67,16 @@ void    PhoneBook::searchContact() {
 
     if (contactCount == 0) {
         std::cout << "Empty PhoneBook" << std::endl;
-        return ;
+        return;
     }
-    contacts[index].getField(0);
-    contacts[index].getField(1);
-    contacts[index].getField(2);
-    displayPhonebook();
+
+    std::string firstName = contacts[i].getField(Contact::FirstName);
+    std::string lastName = contacts[i].getField(Contact::LastName);
+    std::string nickName = contacts[i].getField(Contact::NickName);
+    displayContacts();
+    for (int i = 0; i < PhoneBook::contactCount; i++) {
+
+    }
     std::cout << "Enter index: ";
     std::cin >> index;
     while (!isdigit(index) && (index < 0) && (index > 7)) {
