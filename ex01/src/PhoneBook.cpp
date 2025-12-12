@@ -6,7 +6,7 @@
 /*   By: kmaeda <kmaeda@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:55:37 by kmaeda            #+#    #+#             */
-/*   Updated: 2025/12/11 16:55:24 by kmaeda           ###   ########.fr       */
+/*   Updated: 2025/12/12 13:25:53 by kmaeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../include/PhoneBook.hpp"
 #include <iostream>
 #include <string>
+#include <sstream>
 
 PhoneBook::PhoneBook() : contactCount(0) {}
 PhoneBook::~PhoneBook() {}
@@ -46,41 +47,90 @@ void    PhoneBook::addContact() {
             return;
         }
     }
-    contactCount++;
+    if (contactCount < 8)
+        contactCount++;
     std::cout << "Contact added successfully!" << std::endl;
     return;
 }
 
-void    displayContacts() {
-    std::cout << " ____________________________________________" << std::endl;
-    std::cout << "|                                            |" << std::endl;
-    std::cout << "|            MY AWESOME PHONEBOOK            |" << std::endl;
-    std::cout << "|____________________________________________|" << std::endl;
+
+void    PhoneBook::displayContact(int i) {
+    std::cout << "|" << "         " << (i + 1) << "|";
+    std::string firstName = contacts[i].getField(Contact::FirstName);
+    std::string lastName = contacts[i].getField(Contact::LastName);
+    std::string nickName = contacts[i].getField(Contact::NickName);
+    if (firstName.length() > 10)
+            firstName = firstName.substr(0, 9) + ".";
+    else {
+        while (firstName.length() < 10)
+            firstName = " " + firstName;
+    }
+    std::cout << firstName << "|";
+    if (lastName.length() > 10)
+            lastName = lastName.substr(0, 9) + ".";
+    else {
+        while (lastName.length() < 10)
+            lastName = " " + lastName;
+    }
+    std::cout << lastName << "|";
+    if (nickName.length() > 10)
+            nickName = nickName.substr(0, 9) + ".";
+    else {
+        while (nickName.length() < 10)
+            nickName = " " + nickName;
+    }
+    std::cout << nickName << "|" << std::endl;
+}
+
+static void    displayList() {
+    std::cout << " ___________________________________________" << std::endl;
+    std::cout << "|                                           |" << std::endl;
+    std::cout << "|            MY AWESOME PHONEBOOK           |" << std::endl;
+    std::cout << "|___________________________________________|" << std::endl;
     std::cout << "|" << "     Index" << "|" << "First Name" << "|" << " Last Name" << "|" << " Nick Name" << "|" << std::endl;
-    std::cout << "|                                         |" << std::endl;
-    std::cout << "|                                         |" << std::endl;
-    std::cout << "|_____________________________________________|" << std::endl;
+}
+
+void    PhoneBook::getContact(int index) {
+    int i = index - 1;
+
+    std::cout << "Contact " << index << " details" << std::endl;
+    std::cout << "First Name: " << contacts[i].getField(Contact::FirstName) << std::endl;
+    std::cout << "Last Name: " << contacts[i].getField(Contact::LastName) << std::endl;
+    std::cout << "Nick Name: " << contacts[i].getField(Contact::NickName) << std::endl;
+    std::cout << "Phone Number: " << contacts[i].getField(Contact::PhoneNumber) << std::endl;
+    std::cout << "Darkest Secret: " << contacts[i].getField(Contact::DarkestSecret) << std::endl;
 }
 
 void    PhoneBook::searchContact() {
+    std::string input;
     int index;
 
     if (contactCount == 0) {
         std::cout << "Empty PhoneBook" << std::endl;
         return;
     }
+    displayList();
 
-    std::string firstName = contacts[i].getField(Contact::FirstName);
-    std::string lastName = contacts[i].getField(Contact::LastName);
-    std::string nickName = contacts[i].getField(Contact::NickName);
-    displayContacts();
-    for (int i = 0; i < PhoneBook::contactCount; i++) {
-
-    }
-    std::cout << "Enter index: ";
-    std::cin >> index;
-    while (!isdigit(index) && (index < 0) && (index > 7)) {
-        std::cout << "Not valid index" << std::endl;
+    int displayCount = (contactCount < 8) ? contactCount : 8;
+    for (int i = 0; i < displayCount; i++)
+        displayContact(i);
+    std::cout << "|___________________________________________|" << std::endl;
+    
+    while (true) {
         std::cout << "Enter index: ";
+        std::getline(std::cin, input);
+        
+        std::stringstream ss(input);
+        if (ss >> index && ss.eof()) {
+            if (index >= 1 && index <= contactCount && index <= 8) {
+                break;
+            }
+            std::cout << "Index out of range" << std::endl;
+        }
+        else {
+            std::cout << "Invalid input. Please enter a number." << std::endl;
+        }
     }
+    
+    getContact(index);
 }

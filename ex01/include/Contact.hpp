@@ -6,7 +6,7 @@
 /*   By: kmaeda <kmaeda@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 17:47:10 by kmaeda            #+#    #+#             */
-/*   Updated: 2025/10/24 19:19:29 by kmaeda           ###   ########.fr       */
+/*   Updated: 2025/12/12 12:35:29 by kmaeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,12 @@
 class Contact
 {
 	public:
-		void	setField(int index, const std::string& value);
+		bool	setField(int index, const std::string& value);
 		int		valueCheck(int field, const std::string& value) const;
+		std::string getField(int field) const;
 		Contact(void);
 		~Contact(void);
-
-	private:
-		static std::string	field_names[5];
-		std::string			field_info[5];
-		int					index;
-		
+	
 		enum Info {
 			FirstName,
 			LastName,
@@ -35,6 +31,11 @@ class Contact
 			PhoneNumber,
 			DarkestSecret
 		};
+
+	private:
+		static std::string	field_names[5];
+		std::string			field_info[5];
+		int					index;
 };
 
 #endif

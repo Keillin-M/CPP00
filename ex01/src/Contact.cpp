@@ -6,7 +6,7 @@
 /*   By: kmaeda <kmaeda@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 16:32:27 by kmaeda            #+#    #+#             */
-/*   Updated: 2025/10/24 17:56:08 by kmaeda           ###   ########.fr       */
+/*   Updated: 2025/12/12 13:30:36 by kmaeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int     Contact::valueCheck(int field, const std::string& value) const {
     if (field >= 0 && field < 3) { // FirstName, LastName, NickName
         for (size_t i = 0; i < value.length(); i++) {
             if (!isalpha(value[i])) {
-                std::cerr << "Error: First Name can only contain alphabetic characters" << std::endl;
+                std::cerr << "Error: Name can only contain alphabetic characters" << std::endl;
                 return 1;
             }
         }
@@ -55,18 +55,19 @@ int     Contact::valueCheck(int field, const std::string& value) const {
     return 0;
 }
 
-void    Contact::setField(int field, const std::string& value)
+bool    Contact::setField(int field, const std::string& value)
 {
-    std::string input = value;
-
-    while (valueCheck(field, input)) {
-        std::cout << "Please re-enter: ";
-        std::getline(std::cin, input);
+    if (valueCheck(field, value))
+        return false;
+    
+    if (field >= 0 && field < 5) {
+        field_info[field] = value;
+        return true;
     }
-    if (field >= 0 && field < 5)
-        field_info[field] = input;
-    else
+    else {
         std::cerr << "Invalid field index" << std::endl;
+        return false;
+    }
 }
 
 std::string    Contact::getField(int field) const {
