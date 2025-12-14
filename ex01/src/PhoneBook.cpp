@@ -6,11 +6,10 @@
 /*   By: kmaeda <kmaeda@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:55:37 by kmaeda            #+#    #+#             */
-/*   Updated: 2025/12/12 13:25:53 by kmaeda           ###   ########.fr       */
+/*   Updated: 2025/12/14 12:44:58 by kmaeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Contact.hpp"
 #include "../include/PhoneBook.hpp"
 #include <iostream>
 #include <string>
@@ -47,8 +46,7 @@ void    PhoneBook::addContact() {
             return;
         }
     }
-    if (contactCount < 8)
-        contactCount++;
+    contactCount++;
     std::cout << "Contact added successfully!" << std::endl;
     return;
 }
