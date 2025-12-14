@@ -7,7 +7,9 @@ INCLUDES = -I include
 SRC_DIR = src
 OBJ_DIR = obj
 
-SRCS = main.cpp src/Contact.cpp src/PhoneBook.cpp
+SRCS = main.cpp \
+	$(SRC_DIR)/Contact.cpp \
+	$(SRC_DIR)/PhoneBook.cpp
 
 OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
