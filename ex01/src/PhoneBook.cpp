@@ -6,7 +6,7 @@
 /*   By: kmaeda <kmaeda@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:55:37 by kmaeda            #+#    #+#             */
-/*   Updated: 2025/12/14 12:44:58 by kmaeda           ###   ########.fr       */
+/*   Updated: 2025/12/17 12:23:33 by kmaeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ PhoneBook::~PhoneBook() {}
 void    PhoneBook::addContact() {
     std::string input;
 
-    std::cout << "Please enter ";
+    std::cout << "Please enter " << std::endl;
     for (int i = 0; i < 5; i++) { 
         switch (i) {
             case 0:
@@ -41,6 +41,8 @@ void    PhoneBook::addContact() {
                 break;
         }
         std::getline(std::cin, input);
+        if (std::cin.eof())
+			return ;
         if (!contacts[contactCount % 8].setField(i, input)) {
             std::cout << "Failed to add contact" << std::endl;
             return;
@@ -117,7 +119,8 @@ void    PhoneBook::searchContact() {
     while (true) {
         std::cout << "Enter index: ";
         std::getline(std::cin, input);
-        
+        if (std::cin.eof())
+			return ;
         std::stringstream ss(input);
         if (ss >> index && ss.eof()) {
             if (index >= 1 && index <= contactCount && index <= 8) {

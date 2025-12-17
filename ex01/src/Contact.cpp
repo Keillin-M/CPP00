@@ -6,7 +6,7 @@
 /*   By: kmaeda <kmaeda@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 16:32:27 by kmaeda            #+#    #+#             */
-/*   Updated: 2025/12/12 13:30:36 by kmaeda           ###   ########.fr       */
+/*   Updated: 2025/12/17 12:06:51 by kmaeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ std::string Contact::field_names[5] = {
     "Darkest Secret"
 };
 
-Contact::Contact(void) : index(-1) {
+Contact::Contact(void) {
     for (int i = 0; i < 5; i++)
         field_info[i] = "";
 }
