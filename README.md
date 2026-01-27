@@ -51,9 +51,9 @@ The module focuses on:
 
 * **Language:** C++
 * **Standard:** C++98
-* **Compiler:** c++ / clang++
+* **Compiler:** c++
 * **Build:** Makefile
-* **OS:** Linux / macOS
+* **OS:** Linux 
 
 ---
 
