@@ -5,7 +5,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 SRC_DIR = src
 OBJ_DIR = obj
 
-SRCS = main.cpp
+SRCS = megaphone.cpp
 
 OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
